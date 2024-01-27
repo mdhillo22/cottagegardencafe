@@ -8,23 +8,23 @@ a {
 }
 h1{
   font-family: Arial, sans-serif;
-  color: rgb(18, 33, 18);
+  color: #483622;
   }
   img {
   margin: 5px;
-  border: 1px solid #ccc;
+  border: 2px solid #ffffff;
   float: left;
   }
   img:hover {
-  border: 1px solid #777;
+  border: 1px solid #777777;
   }
 ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
   overflow: hidden;
-  border: 1px solid #e7e7e7;
-  background-color: #f3f3f3;
+  border: 1px solid #ffffff;
+  background-color: #e6f8e4; /***TABS***/
   }
   li {
   float: left;
@@ -37,7 +37,7 @@ ul {
   text-decoration: none;
   }
   li a:hover:not(.active) {
-  background-color: #ddd;
+  background-color: #bbe5bf;
   }
   li a.active {
   color: white;
@@ -54,9 +54,9 @@ ul {
     }
     product {
     margin: 5px;
-    border: 2px solid #ccc;
+    border: 2px solid #ffffff;
     float: left;
-    background: #ffffe6;
+    background: #e6edff;
     box-shadow: 5px 5px 2px #888888;
     min-width: 200px;
     max-width: 200px;
