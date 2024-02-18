@@ -1,0 +1,21 @@
+<h1> Edit Product</h1>
+<form action="/product/save" method="post">
+<input type="hidden" name="product_id" value="<%= onerec.product_id %>" >
+<table>
+<tr> <td> Product Name: </td> <td> <input type="text" name="productname" value="<%= onerec.productname %>" required> </td> </tr>
+<tr> <td> Image: </td> <td> <input type="text" name="prodimage" value="<%= onerec.prodimage %>" required> </td> </tr>
+<tr> <td> Description: </td> <td> <textarea name="description" rows="10" cols="30"><%= onerec.description %></textarea> </td>
+</tr>
+<tr> <td> Ingredients: </td> <td> <textarea name="ingredients" rows="10" cols="30"><%= onerec.ingredients %></textarea> </td>
+</tr>
+<tr> <td> Category: </td> <td> <input type="number" name="category_id" value="<%= onerec.category_id %>" required> </td> </tr>
+<tr> <td> Price: </td> <td> <input type="text" name="saleprice" value="<%= onerec.saleprice %>" required> </td> </tr>
+<tr> <td> Status: </td> <td> <select name="status" required>
+<option selected><%= onerec.status %></option>
+<option>Available</option>
+<option>Contingent</option>
+<option>Coming Soon</option>
+</select> </td> </tr>
+</table>
+<button type="submit">Save</button>
+</form>

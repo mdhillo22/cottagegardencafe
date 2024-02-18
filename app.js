@@ -4,6 +4,25 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var layouts = require('express-ejs-layouts');
+const dotenv = require('dotenv');
+dotenv.config(); 
+
+const mariadb = require('mariadb/callback');
+const db = mariadb.createConnection({host: process.env.DB_HOST,
+                                     user: process.env.DB_USER,
+                                     password: process.env.DB_PASSWORD,
+                                     database: process.env.DB_DATABASE,
+                                     port: process.env.DB_PORT});
+// connect to database
+db.connect((err) => {
+if (err) {
+  console.log("Unable to connect to database due to error: " + err);
+  res.render('error');
+} else {
+  console.log("Connected to DB");
+}
+});
+global.db = db;
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -11,6 +30,14 @@ var aboutRouter = require('./routes/about');
 var contactRouter = require('./routes/contact');
 var privacyRouter = require('./routes/privacy');
 var helpRouter = require('./routes/help');
+var productRouter = require('./routes/product');
+var saleorderRouter = require('./routes/saleorder');
+var customerRouter = require('./routes/customer');
+var categoryRouter = require('./routes/category');
+var orderdetailRouter = require('./routes/orderdetail');
+var reviewRouter = require('./routes/review');
+var subscriptionRouter = require('./routes/subscription');
+
 
 var app = express();
 
@@ -32,6 +59,15 @@ app.use('/about', aboutRouter);
 app.use('/contact', contactRouter);
 app.use('/privacy', privacyRouter);
 app.use('/help', helpRouter);
+app.use('/product', productRouter);
+app.use('/saleorder', saleorderRouter);
+app.use('/customer', customerRouter);
+app.use('/category', categoryRouter);
+app.use('/orderdetail', orderdetailRouter);
+app.use('/review', reviewRouter);
+app.use('/subscription', subscriptionRouter);
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

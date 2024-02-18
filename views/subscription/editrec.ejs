@@ -1,0 +1,13 @@
+<h1> Edit Product</h1>
+<form action="/subscription/save" method="post">
+<input type="hidden" name="subscription_id" value="<%= onerec.subscription_id %>" >
+<table>
+<tr> <td> Subscription ID: </td> <td> <input type="text" name="subscription_id" value="<%= onerec.subscription_id %>" required> </td> </tr>
+<tr> <td> Customer ID: </td> <td> <input type="text" name="customer_id" value="<%= onerec.customer_id %>" required> </td> </tr>
+<tr> <td> Category ID: </td> <td> <input type="text" name="category_id" value="<%= onerec.category_id %>" required> </td> </tr>
+<tr> <td> Subscribe Date: </td> <td> <input type="text" name="subscribedate" value="<%= onerec.subscribedate %>" required> </td> </tr>
+<tr> <td> Unsubscribe Date: </td> <td> <input type="text" name="unsubscribedate" value="<%= onerec.unsubscribedate %>" required> </td> </tr>
+</select> </td> </tr>
+</table>
+<button type="submit">Save</button>
+</form>
