@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+
 // ==================================================
 // Route to list all records. Display view to list all records
 // ==================================================
@@ -13,6 +14,15 @@ router.get('/', function(req, res, next) {
     }
     res.render('review/allrecords', {allrecs: result});
     });
+});
+
+router.post('/submit', function(req, res, next){
+    var prod_id = req.body.product_id;
+    if(req.session.customer_id){
+        res.render('review/submit', {prod_id : prod_id, cust_id : req.session.customer_id});
+    } else {
+        res.render('customer/login', {message: "Please Login First"});
+    }
 });
 
 // ==================================================
@@ -45,8 +55,8 @@ router.get('/addrecord', function(req, res, next) {
 // ==================================================
 
 router.post('/', function(req, res, next) {
-    let insertquery = "INSERT INTO review (review_id, customer_id, product_id, reviewdate, comments, rating, status) VALUES (?, ?, ?, ?, ?, ?, ?)";
-    db.query(insertquery,[req.body.review_id, req.body.customer_id, req.body.product_id, req.body.reviewdate, req.body.comments, req.body.rating, req.body.status], (err, result) => {
+    let insertquery = "INSERT INTO review (customer_id, product_id, comments, reviewdate, rating, status) VALUES (?, ?, ?, now(), ?, 'Review')";
+    db.query(insertquery,[req.body.customer_id, req.body.product_id, req.body.comments, req.body.rating], (err, result) => {
     if (err) {
         console.log(err);
         res.render('error');

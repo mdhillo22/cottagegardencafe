@@ -6,6 +6,8 @@ var logger = require('morgan');
 var layouts = require('express-ejs-layouts');
 const dotenv = require('dotenv');
 dotenv.config(); 
+const session = require('express-session');
+
 
 const mariadb = require('mariadb/callback');
 const db = mariadb.createConnection({host: process.env.DB_HOST,
@@ -37,9 +39,17 @@ var categoryRouter = require('./routes/category');
 var orderdetailRouter = require('./routes/orderdetail');
 var reviewRouter = require('./routes/review');
 var subscriptionRouter = require('./routes/subscription');
+var searchRouter = require('./routes/search');
+var reportsRouter = require('./routes/reports');
+var catalogRouter = require('./routes/catalog');
 
 
 var app = express();
+app.use(session({secret: 'CottageAppSecret'}));
+app.use(function(req,res,next){
+    res.locals.session = req.session;
+    next();
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -53,7 +63,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
+app.use('/index', indexRouter);
 app.use('/users', usersRouter);
 app.use('/about', aboutRouter);
 app.use('/contact', contactRouter);
@@ -66,6 +76,9 @@ app.use('/category', categoryRouter);
 app.use('/orderdetail', orderdetailRouter);
 app.use('/review', reviewRouter);
 app.use('/subscription', subscriptionRouter);
+app.use('/search', searchRouter);
+app.use('/reports', reportsRouter);
+app.use('/catalog', catalogRouter);
 
 
 

@@ -1,23 +1,50 @@
 <table bgcolor='c0e8bb' width='100%'> <tr>
-    <td width='20%' align='left'>
-    <a href="/"><img src="/images/cafelogo.png" width="90" height="80"> 
-   </a></td> 
-   <td width='60%' align='center'><h1>Cottage Garden Cafe</h1></td>
-    <td width='10%' align='center'>Login Control</td>
-    <td width='10%' align='center'>Cart Control</td>
+        <td width='20%' align='left'>
+            <a href="/"><img src="/images/cafelogo.png" width="90" height="80"> </a></td> 
+    <td width='60%' align='center'><h1>Cottage Garden Cafe</h1></td>
+        <td width='10%' align='center'>
+            <% if(session.customer_id > 0) { %>
+                <b> Hello <b> <%= session.custname %>! </b> </br>
+                <a href='/customer/logout'>Logout</a>
+                <% } else { %>
+                <a href='/customer/register'>New Customer</a> </br>
+                <a href='/customer/login'>Login</a>
+                <% } %>
+                
+        </td>
+        <td width='10%' align='center'>
+                    <a href="/catalog/cart">Cart</a>
+        </td>
     </tr></table>
-    <p>  SEARCH CONTROL </p>
+    <p>  
+        <form action="/search" method="get">
+            Search: <input type="text" name="searchcriteria">
+            <input type="submit" value="Go">
+        </form> 
+    </p>
+
     <ul>
-    <li> <a href="/">Home</a> </li>
+    <!--Customer Views-->
+    <li> <a href="/index">Home</a> </li>
     <li> <a href="/about">About Us</a> </li>
     <li> <a href="/contact">Contact Us</a> </li>
-    <li> <a href="/product">Product</a> </li>
-    <li> <a href="/saleorder">Sale Order</a> </li>
-    <li> <a href="/customer">Customer</a> </li>
-    <li> <a href="/category">Category</a> </li>
-    <li> <a href="/orderdetail">Order Detail</a> </li>
+    <li> <a href="/catalog">Catalog</a> </li>
     <li> <a href="/review">Review</a> </li>
-    <li> <a href="/subscription">Subscription</a> </li>
-
-
     </ul>
+    
+    <!--Employee Views-->
+        <% if(session.isadmin) { %>
+
+            <div class="dropdown">
+                <button class="dropbtn">Administration</button>
+                <div class="dropdown-content">
+                    <a href="/product">Product</a>
+                    <a href="/saleorder">Sale Order</a>
+                    <a href="/customer">Customer</a> 
+                    <a href="/category">Category</a> 
+                    <a href="/orderdetail">Order Detail</a>
+                    <a href="/subscription">Subscription</a>
+                    <a href="/reports">Reports</a>
+                </div>
+            </div>
+        <% } %>

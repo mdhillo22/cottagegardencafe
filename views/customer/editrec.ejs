@@ -7,8 +7,14 @@
 <tr> <td> Email: </td> <td> <input type="text" name="email" value="<%= onerec.email %>" required> </td> </tr>
 <tr> <td> Phone: </td> <td> <input type="number" name="phone" value="<%= onerec.phone %>" required> </td> </tr>
 <tr> <td> Username: </td> <td> <input type="text" name="username" value="<%= onerec.username %>" required> </td> </tr>
-<tr> <td> Password: </td> <td> <input type="text" name="password" value="<%= onerec.password %>" required> </td> </tr>
-</select> </td> </tr>
+<tr> <td> Password: </td> <td> <input type="password" name="password" value="<%= onerec.password %>" required> </td> </tr>
+<tr> <td> Is Admin? </td> <td> 
+    <% if (onerec.isadmin){ %>
+        <input type="checkbox" name="isadmin" checked> 
+    <% } else { %>
+        <input type="checkbox" name="isadmin"> 
+    <% } %>
+</td> </tr>
 </table>
 <button type="submit">Save</button>
 </form>

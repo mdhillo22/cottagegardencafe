@@ -1,2 +1,50 @@
+    
 <h1>Welcome to Cottage Garden Cafe</h1>
+<table border="1">
+    <tr>
+        <td width="80%">
+    <p>A place for coffee, friends, and relaxation!</p>
 
+    <%if (allrecs.length > 0) {%>
+        <% allrecs.forEach((recref, index) => { %>
+            <product>
+                <form action="/catalog/add" method="post">
+                    <input type="hidden" name="product_id" value=<%= recref.product_id %> >
+                <table>
+                    <tr> <td colspan="2"><%= recref.product_id %></td></tr>
+                    <tr> <td colspan="2"><%= recref.productname %></td></tr>
+                    <tr> <td colspan="2"><%= recref.prodimage %></td></tr>
+                    <tr> <td><%=recref.description %></td> </tr>
+                    <tr> <td><%= recref.ingredients%></td></tr>
+                    <tr> <td><%= recref.category_id %></td></tr>
+                    <tr> <td><%= recref.saleprice %></td></tr>
+                    <tr> <td><%= recref.status %></td></tr>
+                    <tr> <td><a href='/product/<%= recref.product_id%>/show'>Details</a></td></tr>
+                 
+                    <td>Quantity: <select name="qty" required>
+                    <select name="qty" required>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                    </td>
+                <td><button type="submit" class="button1">Add to Cart</button></td>
+                <tr>
+            
+                </table>
+                </form>
+            </product>
+    <% }); %>
+    <% } else { %>
+        <p>No Records Available</p>
+    <% } %>
+    </td>
+
+<td width="20%">
+    <% promos.forEach((recref, index) => { %> 
+        <figure> <img src= "/images/<%= recref.promoimage %>"> </figure>
+    <% }); %>
+</td>
+</tr></table>
