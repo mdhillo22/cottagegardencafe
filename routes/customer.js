@@ -143,7 +143,72 @@ router.get('/:recordid/edit', adminonly, function(req, res, next) {
     }
     });
 });
+
+// ==================================================
+//Route to provide form for new password
+// ==================================================
+router.get('/pwdchg', function(req, res, next){
+    res.render('customer/newpwd');
+});
+
+
+
+// ==================================================
+// Route to edit one specific profile record.
+// ==================================================
+router.get('/profile', function(req, res, next) {
+    let query = "SELECT customer_id, firstname, lastname, email, phone, username, password, isadmin FROM customer WHERE customer_id = " + req.session.customer_id;
+    // execute query
+    db.query(query, (err, result) => {
+    if (err) {
+        console.log(err);
+        res.render('error');
+    } else {
+        res.render('customer/profile', {onerec: result[0] });
+    }
+    });
+});
+ 
+// ==================================================
+// Route to save edited profile data in database.
+// ==================================================
+router.post('/profile', function(req, res, next) {
+  
+    let updatequery = "UPDATE customer SET firstname = ?, lastname = ?, email = ?, phone = ? WHERE customer_id = " + req.body.customer_id;
+    db.query(updatequery,[req.body.firstname, req.body.lastname, req.body.email,
+    req.body.phone],(err, result) => {
+    if (err) {
+        console.log(err);
+        res.render('error');
+    } else {
+        res.redirect('/');
+    }
+    });
+});    
+
+
+// ==================================================
+// Route to change user password in database.
+// ==================================================
+router.post('/pwdchg', function(req, res, next) {
+  
+    let updatequery = "UPDATE customer SET password = ? WHERE customer_id = " + req.session.customer_id;
     
+    bcrypt.genSalt(10, (err, salt) => {
+        bcrypt.hash(req.body.password, salt, (err, hash) => {
+        if(err) { res.render('error');}
+            db.query(updatequery,[hash],(err, result) => {
+                if (err) {
+                    console.log(err);
+                    res.render('error');
+                } else {
+                    res.redirect('/customer/logout');
+                }
+            });
+        });
+    });
+ });  
+
 
 // ==================================================
 // Route to save edited data in database.

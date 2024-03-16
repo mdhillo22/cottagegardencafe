@@ -5,10 +5,13 @@
         <td width='10%' align='center'>
             <% if(session.customer_id > 0) { %>
                 <b> Hello <b> <%= session.custname %>! </b> </br>
-                <a href='/customer/logout'>Logout</a>
+                <a href='/customer/logout'>Logout</a> </br>
+                <a href='/customer/profile'>Profile Update</a> </br>
+                <a href='/customer/pwdchg'>Password Change</a> </br>
                 <% } else { %>
                 <a href='/customer/register'>New Customer</a> </br>
-                <a href='/customer/login'>Login</a>
+                <a href='/customer/login'>Login</a> <br>
+                
                 <% } %>
                 
         </td>
