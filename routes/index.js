@@ -3,7 +3,7 @@ var express = require('express');
 var router = express.Router();
 
 router.get('/', function(req, res, next) {
-let query = "SELECT product_id, productname, category_id, saleprice, status FROM product WHERE homepage=1";
+let query = "SELECT product_id, productname, prodimage, category_id, saleprice, status FROM product WHERE homepage=1";
 
 // execute query
 db.query(query, (err, result) => {
